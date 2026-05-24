@@ -2,51 +2,144 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="theme-color" content="#25D366">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-title" content="WA Direct">
     <title>WA Direct - WhatsApp Number Redirect</title>
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <!-- Favicon: Green circle with white 'W' -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%2325D366'/><text x='50' y='65' font-family='Arial' font-weight='bold' font-size='50' text-anchor='middle' fill='white'>W</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fdfbf7; /* Creamy White */
-            --pattern-color: rgba(37, 211, 102, 0.05);
-            --container-bg: rgba(255, 255, 255, 0.7);
-            --container-border: rgba(37, 211, 102, 0.15);
-            --text-color: #075e54; /* Deep Forest Green */
-            --secondary-text: #4a665a;
-            --accent-color: #25d366; /* WhatsApp Green */
+            --bg-color: #050f0a;
+            --bg-mesh-a: #0a1f12;
+            --bg-mesh-b: #051009;
+            --bg-mesh-c: #0d2918;
+            --container-bg: rgba(255, 255, 255, 0.04);
+            --container-border: rgba(255, 255, 255, 0.08);
+            --text-color: #ffffff;
+            --secondary-text: rgba(255, 255, 255, 0.45);
+            --accent-strong: rgba(37, 211, 102, 0.35);
+            --accent-soft: rgba(37, 211, 102, 0.08);
+            --accent-color: #25d366;
             --accent-hover: #20bd5a;
             --error-color: #ea0038;
             --warning-color: #ffbc00;
-            --input-bg: rgba(255, 255, 255, 0.8);
-            --input-border: rgba(37, 211, 102, 0.2);
+            --input-bg: rgba(255, 255, 255, 0.06);
+            --input-border: rgba(255, 255, 255, 0.1);
             --input-focus: #25d366;
-            --history-bg: rgba(37, 211, 102, 0.05);
-            --history-hover: rgba(37, 211, 102, 0.12);
-            --shadow: 0 12px 40px rgba(7, 94, 84, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --history-bg: rgba(255, 255, 255, 0.05);
+            --history-hover: rgba(37, 211, 102, 0.08);
+            --shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(37, 211, 102, 0.05);
+            --transition: all 0.2s ease;
+            --button-spring: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #051a11; /* Very Dark Forest Green */
-                --pattern-color: rgba(255, 255, 255, 0.02);
+                --bg-color: #050f0a;
+                --bg-mesh-a: #0a1f12;
+                --bg-mesh-b: #051009;
+                --bg-mesh-c: #0d2918;
                 --container-bg: rgba(255, 255, 255, 0.04);
-                --container-border: rgba(37, 211, 102, 0.1);
-                --text-color: #e6eee3; /* Creamy Light Text */
-                --secondary-text: #8ea195;
-                --input-bg: rgba(255, 255, 255, 0.03);
+                --container-border: rgba(255, 255, 255, 0.08);
+                --text-color: #ffffff;
+                --secondary-text: rgba(255, 255, 255, 0.45);
+                --input-bg: rgba(255, 255, 255, 0.06);
                 --input-border: rgba(255, 255, 255, 0.1);
-                --history-bg: rgba(255, 255, 255, 0.02);
-                --history-hover: rgba(37, 211, 102, 0.15);
-                --shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+                --history-bg: rgba(255, 255, 255, 0.05);
+                --history-hover: rgba(37, 211, 102, 0.08);
+                --shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(37, 211, 102, 0.05);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-color: #ece5dd;
+                --bg-mesh-a: #f6efe7;
+                --bg-mesh-b: #ece5dd;
+                --bg-mesh-c: #e3dbd0;
+                --container-bg: rgba(255, 255, 255, 0.75);
+                --container-border: rgba(0, 0, 0, 0.08);
+                --text-color: #111111;
+                --secondary-text: rgba(17, 17, 17, 0.58);
+                --input-bg: rgba(0, 0, 0, 0.05);
+                --input-border: rgba(0, 0, 0, 0.1);
+                --history-bg: rgba(255, 255, 255, 0.52);
+                --history-hover: rgba(37, 211, 102, 0.08);
+                --shadow: 0 24px 60px rgba(77, 57, 35, 0.12), 0 0 0 1px rgba(37, 211, 102, 0.05);
+            }
+
+            .site-header,
+            .site-footer {
+                background: rgba(236, 229, 221, 0.8);
+                border-color: rgba(0, 0, 0, 0.08);
+            }
+
+            .site-brand,
+            .site-nav-link,
+            .footer-link {
+                color: rgba(17, 17, 17, 0.58);
+            }
+
+            .site-nav-link:hover,
+            .footer-link:hover,
+            .site-brand:hover {
+                color: #111111;
+            }
+
+            .footer-left {
+                color: rgba(17, 17, 17, 0.45);
+            }
+
+            .footer-center {
+                color: rgba(17, 17, 17, 0.35);
+            }
+
+            .legal-modal-close {
+                color: var(--text-color);
+                background: rgba(0, 0, 0, 0.05);
+                border-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        @keyframes meshShift {
+            0% {
+                background-position: 0% 0%, 100% 0%, 50% 100%;
+            }
+            50% {
+                background-position: 100% 100%, 0% 100%, 50% 0%;
+            }
+            100% {
+                background-position: 0% 0%, 100% 0%, 50% 100%;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes historyFade {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -57,22 +150,118 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(37, 211, 102, 0.3) transparent;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(37, 211, 102, 0.3);
+            border-radius: 999px;
+        }
+
         body {
             background-color: var(--bg-color);
-            background-image: 
-                linear-gradient(45deg, var(--pattern-color) 25%, transparent 25%), 
-                linear-gradient(-45deg, var(--pattern-color) 25%, transparent 25%), 
-                linear-gradient(45deg, transparent 75%, var(--pattern-color) 75%), 
-                linear-gradient(-45deg, transparent 75%, var(--pattern-color) 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(10, 31, 18, 0.95) 0%, transparent 42%),
+                radial-gradient(circle at 85% 18%, rgba(5, 16, 9, 0.95) 0%, transparent 42%),
+                radial-gradient(circle at 50% 82%, rgba(13, 41, 24, 0.92) 0%, transparent 48%);
+            background-size: 140% 140%;
             color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
+            padding: 0;
+            transition: background-color 0.5s ease, color 0.3s ease;
+            animation: meshShift 60s ease-in-out infinite;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            mix-blend-mode: soft-light;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background: rgba(5, 15, 10, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .site-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-family: 'Syne', 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+        }
+
+        .site-brand-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #25D366;
+            box-shadow: 0 0 12px rgba(37, 211, 102, 0.55);
+            flex: none;
+        }
+
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .site-nav-link,
+        .footer-link {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .site-nav-link:hover,
+        .footer-link:hover {
+            color: #ffffff;
+        }
+
+        .page-main {
+            min-height: calc(100vh - 56px - 72px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
-            transition: background-color 0.5s ease;
+        }
+
+        .page-shell {
+            width: 100%;
         }
 
         .container {
@@ -80,87 +269,126 @@
             width: 100%;
             max-width: 600px;
             background-color: var(--container-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 50px 40px;
-            border-radius: 24px;
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            padding: 40px 48px;
+            border-radius: 28px;
             border: 1px solid var(--container-border);
             box-shadow: var(--shadow);
             transition: var(--transition);
+            animation: fadeUp 0.4s ease both;
+            margin: 0 auto;
         }
 
-        header {
-            margin-bottom: 40px;
+        .container::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        .container > header {
+            margin-bottom: 34px;
             text-align: center;
         }
 
         h1 {
-            font-size: 32px;
-            font-weight: 700;
+            font-family: 'Syne', 'Inter', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
             margin-bottom: 10px;
-            color: var(--accent-color);
-            letter-spacing: -0.5px;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            line-height: 1;
         }
 
         p.subtitle {
             color: var(--secondary-text);
-            font-size: 15px;
+            font-size: 0.9rem;
             font-weight: 400;
         }
 
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 22px;
+            width: 100%;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
-            font-size: 13px;
+            margin-bottom: 11px;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.12em;
             color: var(--accent-color);
         }
 
         .input-wrapper {
             display: flex;
-            gap: 12px;
+            gap: 0;
+            align-items: stretch;
+            position: relative;
         }
 
         select, input[type="text"], textarea {
             padding: 14px 18px;
-            border-radius: 16px;
+            border-radius: 14px;
             border: 1px solid var(--input-border);
             background-color: var(--input-bg);
             color: var(--text-color);
-            font-size: 16px;
+            font-size: 1rem;
             outline: none;
-            transition: var(--transition);
+            transition: all 0.2s ease;
         }
 
         select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
             cursor: pointer;
-            padding-right: 10px;
+            padding-right: 42px;
+            min-width: 170px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            background-image:
+                linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.75) 50%),
+                linear-gradient(135deg, rgba(255,255,255,0.75) 50%, transparent 50%);
+            background-position:
+                calc(100% - 22px) calc(50% - 3px),
+                calc(100% - 16px) calc(50% - 3px);
+            background-size: 6px 6px, 6px 6px;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 1;
         }
 
         input[type="text"] {
             flex: 1;
-            font-size: 18px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            margin-left: -1px;
         }
 
         input[type="text"]::placeholder, textarea::placeholder {
-            color: rgba(37, 211, 102, 0.4);
+            color: rgba(255, 255, 255, 0.25);
         }
 
         input[type="text"]:focus, select:focus, textarea:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
-            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+            background-color: var(--input-bg);
+            position: relative;
+            z-index: 2;
         }
 
         textarea {
             width: 100%;
-            border-radius: 16px;
+            border-radius: 14px;
             resize: vertical;
             min-height: 100px;
         }
@@ -184,6 +412,10 @@
             display: flex;
             gap: 16px;
             margin-top: 10px;
+            width: 100%;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         button {
@@ -191,10 +423,10 @@
             padding: 16px;
             border: none;
             border-radius: 14px;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--button-spring);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -202,31 +434,32 @@
         }
 
         .btn-primary {
-            background-color: var(--accent-color);
+            background: linear-gradient(135deg, #25D366, #1da851);
             color: white;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+            letter-spacing: 0.01em;
+            box-shadow: 0 4px 24px rgba(37, 211, 102, 0.35);
         }
 
         .btn-primary:hover:not(:disabled) {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.42);
         }
 
         .btn-secondary {
-            background-color: var(--input-bg);
-            color: var(--text-color);
-            border: 1px solid var(--container-border);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.07);
+            color: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            font-weight: 600;
+            backdrop-filter: blur(24px);
         }
 
         .btn-secondary:hover {
-            background-color: var(--history-hover);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
         }
 
         button:active {
-            transform: translateY(0);
+            transform: translateY(0) scale(0.99);
         }
 
         button:disabled {
@@ -245,26 +478,30 @@
             padding: 8px 14px;
             border: 1px solid rgba(37, 211, 102, 0.55);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.14);
-            color: var(--text-color);
-            font-size: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            color: #25D366;
+            font-size: 0.75rem;
             font-weight: 700;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 8px 24px rgba(7, 94, 84, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
             display: none;
             z-index: 2;
         }
 
         .install-btn:hover {
-            background: rgba(37, 211, 102, 0.12);
+            background: rgba(37, 211, 102, 0.1);
             border-color: var(--accent-color);
         }
 
         .history-section {
-            margin-top: 45px;
-            padding-top: 30px;
-            border-top: 1px solid var(--container-border);
+            margin-top: 34px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            width: 100%;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .history-header {
@@ -275,28 +512,29 @@
         }
 
         .history-header h2 {
-            font-size: 14px;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--secondary-text);
+            letter-spacing: 0.12em;
+            color: var(--accent-color);
             font-weight: 600;
         }
 
         .btn-clear {
             background: transparent;
-            color: var(--secondary-text);
+            color: rgba(234, 0, 56, 0.72);
             font-size: 12px;
-            padding: 6px 12px;
+            padding: 4px 0;
             width: auto;
             flex: none;
-            border: 1px solid var(--container-border);
-            border-radius: 10px;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .btn-clear:hover {
-            background: rgba(234, 0, 56, 0.1);
+            background: transparent;
             color: var(--error-color);
-            border-color: rgba(234, 0, 56, 0.2);
+            border-color: transparent;
         }
 
         .history-list {
@@ -310,27 +548,31 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 20px;
+            flex-wrap: wrap;
+            gap: 8px 12px;
+            padding: 6px 14px;
             background-color: var(--history-bg);
-            border-radius: 12px;
+            border-radius: 999px;
             cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid transparent;
+            transition: all 0.15s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            animation: historyFade 0.25s ease both;
         }
 
         .history-item:hover {
             background-color: var(--history-hover);
-            border-color: var(--accent-color);
-            transform: translateX(5px);
+            border-color: rgba(37, 211, 102, 0.4);
+            transform: translateY(-1px);
         }
 
         .history-item .number {
             font-weight: 600;
             color: var(--text-color);
+            font-size: 0.85rem;
         }
 
         .history-item .time {
-            font-size: 12px;
+            font-size: 0.85rem;
             color: var(--secondary-text);
         }
 
@@ -357,6 +599,308 @@
             bottom: 40px;
         }
 
+        .mobile-install-banner {
+            position: fixed;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 1px solid rgba(37, 211, 102, 0.35);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.16);
+            color: var(--text-color);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 18px 40px rgba(7, 94, 84, 0.18);
+            z-index: 1001;
+        }
+
+        .mobile-install-banner.show {
+            display: flex;
+        }
+
+        .mobile-banner-copy {
+            flex: 1;
+            min-width: 0;
+            font-size: 14px;
+            line-height: 1.35;
+        }
+
+        .mobile-banner-action,
+        .mobile-banner-dismiss {
+            flex: none;
+            width: auto;
+            min-height: 40px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+        }
+
+        .mobile-banner-action {
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.25);
+        }
+
+        .mobile-banner-dismiss {
+            background: transparent;
+            color: var(--secondary-text);
+            border: 1px solid var(--container-border);
+        }
+
+        .section-anchor {
+            width: 100%;
+            height: 1px;
+            margin-top: 22px;
+        }
+
+        .how-it-works-section {
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .how-it-works-title {
+            margin-bottom: 32px;
+            text-align: center;
+            font-family: 'Syne', 'Inter', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .how-it-works-grid {
+            display: flex;
+            gap: 24px;
+        }
+
+        .how-step-card {
+            flex: 1;
+            position: relative;
+            padding: 28px 24px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(32px) saturate(180%);
+            -webkit-backdrop-filter: blur(32px) saturate(180%);
+        }
+
+        .how-step-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            pointer-events: none;
+        }
+
+        .how-step-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #25D366;
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .how-step-icon {
+            font-size: 2rem;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .how-step-title {
+            font-family: 'Syne', 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .how-step-body {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .site-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 20px 40px;
+            background: rgba(5, 15, 10, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.78rem;
+        }
+
+        .footer-left {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .footer-center {
+            color: rgba(255, 255, 255, 0.25);
+            text-align: center;
+        }
+
+        .footer-heart {
+            color: #25D366;
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .legal-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 200;
+        }
+
+        .legal-modal.show {
+            display: flex;
+        }
+
+        .legal-modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 36px 40px;
+            border-radius: 28px;
+            background: var(--container-bg);
+            border: 1px solid var(--container-border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(37, 211, 102, 0.6) transparent;
+        }
+
+        .legal-modal-card::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .legal-modal-card::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .legal-modal-card::-webkit-scrollbar-thumb {
+            background: rgba(37, 211, 102, 0.6);
+            border-radius: 999px;
+        }
+
+        .legal-modal-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        .legal-modal-title {
+            font-family: 'Syne', 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 8px;
+        }
+
+        .legal-modal-updated {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.75rem;
+            margin-bottom: 18px;
+        }
+
+        .legal-modal-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin-bottom: 18px;
+        }
+
+        .legal-modal-body,
+        .legal-modal-body p {
+            color: var(--secondary-text);
+            font-size: 0.88rem;
+            line-height: 1.8;
+        }
+
+        .legal-modal-body p + p,
+        .legal-modal-body p + ul,
+        .legal-modal-body ul + p {
+            margin-top: 14px;
+        }
+
+        .legal-modal-body ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .legal-modal-body li {
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .legal-modal-body li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.8em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #25D366;
+            transform: translateY(-50%);
+        }
+
+        .legal-modal-body li + li {
+            margin-top: 10px;
+        }
+
+        .legal-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            min-height: 36px;
+            padding: 0;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.4);
+            box-shadow: none;
+            transition: color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .legal-modal-close:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         /* Animations */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
@@ -373,83 +917,337 @@
 
         .shortcuts-hint {
             margin-top: 30px;
-            text-align: center;
-            font-size: 11px;
-            color: var(--secondary-text);
-            opacity: 0.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.78rem;
             font-weight: 500;
+            backdrop-filter: blur(18px);
+            width: 100%;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         kbd {
-            background: var(--input-bg);
-            padding: 3px 6px;
-            border-radius: 6px;
-            font-size: 10px;
-            border: 1px solid var(--container-border);
-            margin: 0 2px;
+            background: rgba(255,255,255,0.07);
+            padding: 5px 8px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            margin: 0 4px 0 0;
             color: var(--text-color);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
         }
 
         @media (max-width: 640px) {
+            .site-header,
+            .site-footer {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .site-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .how-it-works-section {
+                padding: 48px 20px 56px;
+            }
+
+            .how-it-works-grid {
+                flex-direction: column;
+            }
+
             .container {
-                padding: 64px 22px 36px;
+                padding: 48px 24px 34px;
             }
 
             .install-btn {
                 top: 14px;
                 right: 14px;
             }
+
+            .shortcuts-hint {
+                border-radius: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                min-height: 100vh;
+            }
+
+            .site-header {
+                padding: 0 16px;
+            }
+
+            .site-nav {
+                gap: 12px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 600px;
+                min-height: auto;
+                border-radius: 28px;
+                border: 1px solid var(--container-border);
+                padding: 28px 18px 40px;
+            }
+
+            .page-main {
+                min-height: calc(100vh - 56px - 72px);
+                padding: 20px 12px;
+            }
+
+            .container > header {
+                margin-bottom: 32px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            p.subtitle {
+                font-size: 16px;
+            }
+
+            label {
+                font-size: 14px;
+            }
+
+            .input-wrapper,
+            .button-group {
+                flex-direction: column;
+            }
+
+            select,
+            input[type="text"],
+            textarea,
+            button {
+                min-height: 52px;
+                font-size: 17px;
+            }
+
+            textarea {
+                min-height: 120px;
+            }
+
+            .history-item {
+                align-items: flex-start;
+                padding: 16px 18px;
+            }
+
+            .history-item .number,
+            .history-item .time {
+                font-size: 14px;
+            }
+
+            .install-btn {
+                top: auto;
+                right: auto;
+                left: 50%;
+                bottom: 72px;
+                transform: translateX(-50%);
+            }
+
+            .toast.show {
+                bottom: 96px;
+            }
+
+            .mobile-install-banner {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                padding: 12px 14px;
+            }
+
+            .mobile-banner-copy {
+                font-size: 13px;
+            }
+
+            .site-footer {
+                padding: 18px 16px 22px;
+            }
+
+            .how-it-works-section {
+                padding: 42px 16px 48px;
+            }
+
+            .how-it-works-grid {
+                gap: 16px;
+            }
+
+            .legal-modal-card {
+                padding: 32px 22px 24px;
+            }
+        }
+
+        @media (hover: none) {
+            .btn-primary:hover:not(:disabled) {
+                background: linear-gradient(135deg, #25D366, #1da851);
+                box-shadow: 0 4px 24px rgba(37, 211, 102, 0.35);
+                color: white;
+                transform: none;
+            }
+
+            .btn-secondary:hover {
+                background: rgba(255,255,255,0.07);
+                transform: none;
+            }
+
+            .btn-clear:hover {
+                background: transparent;
+                color: rgba(234, 0, 56, 0.72);
+                border-color: transparent;
+                transform: none;
+            }
+
+            .install-btn:hover {
+                background: rgba(255, 255, 255, 0.04);
+                border-color: rgba(37, 211, 102, 0.55);
+                transform: none;
+            }
+
+            .history-item:hover {
+                background-color: var(--history-bg);
+                border-color: transparent;
+                transform: none;
+            }
+        }
+
+        .touch-active {
+            transform: scale(0.97) !important;
+        }
+
+        @media (max-width: 480px) {
+            .install-btn.touch-active {
+                transform: translateX(-50%) scale(0.97) !important;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <button id="install-btn" class="install-btn" type="button">Install App</button>
-        <header>
-            <h1>WA Direct</h1>
-            <p class="subtitle">Quickly chat on WhatsApp without saving contacts</p>
-        </header>
+    <header class="site-header">
+        <a href="#" class="site-brand" aria-label="WA Direct home">
+            <span class="site-brand-dot" aria-hidden="true"></span>
+            <span>WA Direct</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+            <a class="site-nav-link" href="#how-it-works">How it works</a>
+            <a id="header-install-link" class="site-nav-link" href="#">Install App</a>
+        </nav>
+    </header>
 
-        <div class="form-group">
-            <label for="phone-input">Phone Number</label>
-            <div class="input-wrapper">
-                <select id="country-code" title="Select Country Code">
-                    <!-- Loaded via JS -->
-                </select>
-                <input type="text" id="phone-input" placeholder="Enter number with country code" autocomplete="off" autofocus>
+    <div class="page-shell">
+        <main class="page-main">
+            <div class="container">
+                <button id="install-btn" class="install-btn" type="button">Install App</button>
+                <header>
+                    <h1>WA Direct</h1>
+                    <p class="subtitle">Quickly chat on WhatsApp without saving contacts</p>
+                </header>
+
+                <div class="form-group">
+                    <label for="phone-input">Phone Number</label>
+                    <div class="input-wrapper">
+                        <select id="country-code" title="Select Country Code">
+                            <!-- Loaded via JS -->
+                        </select>
+                        <input type="text" id="phone-input" placeholder="Enter number with country code" autocomplete="off" autofocus>
+                    </div>
+                    <div id="validation-msg" class="error-message"></div>
+                    <div id="warning-msg" class="warning-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message-input">Optional Message</label>
+                    <textarea id="message-input" placeholder="Pre-fill a message (optional)"></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button id="open-btn" class="btn-primary" disabled>
+                        Open WhatsApp
+                    </button>
+                    <button id="copy-btn" class="btn-secondary">
+                        Copy Link
+                    </button>
+                </div>
+
+                <div id="history-container" class="history-section" style="display: none;">
+                    <div class="history-header">
+                        <h2>Recent Numbers</h2>
+                        <button id="clear-history" class="btn-clear">Clear history</button>
+                    </div>
+                    <ul id="history-list" class="history-list"></ul>
+                </div>
+
+                <div class="shortcuts-hint">
+                    <kbd>Enter</kbd> Open &nbsp; <kbd>Ctrl+L</kbd> Focus &nbsp; <kbd>Esc</kbd> Clear
+                </div>
             </div>
-            <div id="validation-msg" class="error-message"></div>
-            <div id="warning-msg" class="warning-message"></div>
-        </div>
+        </main>
 
-        <div class="form-group">
-            <label for="message-input">Optional Message</label>
-            <textarea id="message-input" placeholder="Pre-fill a message (optional)"></textarea>
-        </div>
-
-        <div class="button-group">
-            <button id="open-btn" class="btn-primary" disabled>
-                Open WhatsApp
-            </button>
-            <button id="copy-btn" class="btn-secondary">
-                Copy Link
-            </button>
-        </div>
-
-        <div id="history-container" class="history-section" style="display: none;">
-            <div class="history-header">
-                <h2>Recent Numbers</h2>
-                <button id="clear-history" class="btn-clear">Clear history</button>
+        <section id="how-it-works" class="how-it-works-section">
+            <h2 class="how-it-works-title">How it works</h2>
+            <div class="how-it-works-grid">
+                <article class="how-step-card">
+                    <div class="how-step-badge">1</div>
+                    <div class="how-step-icon" aria-hidden="true">📋</div>
+                    <h3 class="how-step-title">Paste Number</h3>
+                    <p class="how-step-body">Copy any phone number. Paste it into WA Direct.
+No need to save it to your contacts first.</p>
+                </article>
+                <article class="how-step-card">
+                    <div class="how-step-badge">2</div>
+                    <div class="how-step-icon" aria-hidden="true">🌍</div>
+                    <h3 class="how-step-title">Select Country</h3>
+                    <p class="how-step-body">Your country is auto-detected. Change it anytime
+from the dropdown. Country code is added automatically.</p>
+                </article>
+                <article class="how-step-card">
+                    <div class="how-step-badge">3</div>
+                    <div class="how-step-icon" aria-hidden="true">💬</div>
+                    <h3 class="how-step-title">Open WhatsApp</h3>
+                    <p class="how-step-body">Click Open WhatsApp. A chat opens instantly in
+WhatsApp — desktop app or web, your choice.</p>
+                </article>
             </div>
-            <ul id="history-list" class="history-list"></ul>
-        </div>
-
-        <div class="shortcuts-hint">
-            <kbd>Enter</kbd> Open &nbsp; <kbd>Ctrl+L</kbd> Focus &nbsp; <kbd>Esc</kbd> Clear
-        </div>
+        </section>
     </div>
 
+    <footer class="site-footer">
+        <div class="footer-left">© 2025 WA Direct. All rights reserved.</div>
+        <div class="footer-center">Built with <span class="footer-heart">♥</span> for quick WhatsApp chats</div>
+        <div class="footer-right">
+            <a id="privacy-link" class="footer-link" href="#">Privacy Policy</a>
+            <a id="terms-link" class="footer-link" href="#">Terms of Use</a>
+        </div>
+    </footer>
+
     <div id="toast" class="toast">Copied!</div>
+    <div id="mobile-install-banner" class="mobile-install-banner">
+        <div id="mobile-banner-copy" class="mobile-banner-copy">Add to Home Screen for app experience</div>
+        <button id="mobile-banner-action" class="mobile-banner-action" type="button">Install</button>
+        <button id="mobile-banner-dismiss" class="mobile-banner-dismiss" type="button" aria-label="Dismiss install banner">X</button>
+    </div>
+    <div id="legal-modal" class="legal-modal" aria-hidden="true">
+        <div class="legal-modal-card" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title">
+            <button id="legal-modal-close" class="legal-modal-close" type="button" aria-label="Close modal">X</button>
+            <h2 id="legal-modal-title" class="legal-modal-title"></h2>
+            <div id="legal-modal-updated" class="legal-modal-updated"></div>
+            <div class="legal-modal-divider"></div>
+            <div id="legal-modal-body" class="legal-modal-body"></div>
+        </div>
+    </div>
 
     <script>
         const countries = [
@@ -487,23 +1285,198 @@
         const clearHistoryBtn = document.getElementById('clear-history');
         const toast = document.getElementById('toast');
         const installBtn = document.getElementById('install-btn');
+        const headerInstallLink = document.getElementById('header-install-link');
+        const mobileInstallBanner = document.getElementById('mobile-install-banner');
+        const mobileBannerCopy = document.getElementById('mobile-banner-copy');
+        const mobileBannerAction = document.getElementById('mobile-banner-action');
+        const mobileBannerDismiss = document.getElementById('mobile-banner-dismiss');
+        const privacyLink = document.getElementById('privacy-link');
+        const termsLink = document.getElementById('terms-link');
+        const legalModal = document.getElementById('legal-modal');
+        const legalModalTitle = document.getElementById('legal-modal-title');
+        const legalModalUpdated = document.getElementById('legal-modal-updated');
+        const legalModalBody = document.getElementById('legal-modal-body');
+        const legalModalClose = document.getElementById('legal-modal-close');
         let deferredInstallPrompt = null;
+        let mobileFallbackTimer = null;
 
         if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
             installBtn.style.display = 'none';
         }
 
+        function isMobile() {
+            return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        }
+
+        function isIOS() {
+            return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        }
+
+        function isStandalone() {
+            return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+        }
+
+        function hideMobileBanner() {
+            mobileInstallBanner.classList.remove('show');
+        }
+
+        function showMobileBanner() {
+            if (!isMobile() || isStandalone() || sessionStorage.getItem('wa_mobile_banner_seen')) {
+                return;
+            }
+            mobileInstallBanner.classList.add('show');
+        }
+
+        function markMobileBannerSeen() {
+            sessionStorage.setItem('wa_mobile_banner_seen', '1');
+        }
+
+        function getEncodedMessage() {
+            return encodeURIComponent(messageInput.value.trim());
+        }
+
+        function getWebUrl() {
+            const num = phoneInput.value;
+            const msg = getEncodedMessage();
+            let url = `https://wa.me/${num}`;
+            if (msg) {
+                url += `?text=${msg}`;
+            }
+            return url;
+        }
+
+        function getDeepLinkUrl() {
+            const num = phoneInput.value;
+            const msg = getEncodedMessage();
+            let url = `whatsapp://send?phone=${num}`;
+            if (msg) {
+                url += `&text=${msg}`;
+            }
+            return url;
+        }
+
+        function promptInstall() {
+            if (!deferredInstallPrompt) return;
+
+            deferredInstallPrompt.prompt();
+            deferredInstallPrompt.userChoice.then(({ outcome }) => {
+                if (outcome === 'accepted') {
+                    installBtn.style.display = 'none';
+                    hideMobileBanner();
+                }
+                deferredInstallPrompt = null;
+            });
+        }
+
+        function showLegalModal(title, updated, body) {
+            legalModalTitle.textContent = title;
+            legalModalUpdated.textContent = updated;
+            legalModalBody.innerHTML = body;
+            legalModal.classList.add('show');
+            legalModal.setAttribute('aria-hidden', 'false');
+        }
+
+        function hideLegalModal() {
+            legalModal.classList.remove('show');
+            legalModal.setAttribute('aria-hidden', 'true');
+        }
+
+        function addTouchFeedback(element) {
+            if (!element) return;
+
+            const activate = () => element.classList.add('touch-active');
+            const deactivate = () => element.classList.remove('touch-active');
+
+            element.addEventListener('touchstart', activate, { passive: true });
+            element.addEventListener('touchend', deactivate, { passive: true });
+            element.addEventListener('touchcancel', deactivate, { passive: true });
+        }
+
+        function detectDefaultCountryCode() {
+            const locale = Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || '';
+            const regionMatch = locale.match(/-([A-Z]{2})$/i);
+            const region = regionMatch ? regionMatch[1].toUpperCase() : '';
+            const regionToCode = {
+                IN: '91',
+                US: '1',
+                CA: '1',
+                GB: '44',
+                AE: '971',
+                SA: '966',
+                PK: '92',
+                BD: '880',
+                NP: '977',
+                AU: '61',
+                DE: '49',
+                FR: '33',
+                SG: '65',
+                MY: '60',
+                ID: '62',
+                NG: '234',
+                KE: '254',
+                BR: '55',
+                ZA: '27',
+                QA: '974'
+            };
+
+            return regionToCode[region] || '91';
+        }
+
+        function copyTextFallback(text) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            tempInput.setAttribute('readonly', '');
+            tempInput.style.position = 'fixed';
+            tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, tempInput.value.length);
+            const copied = document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            return copied;
+        }
+
+        function showCopyToast() {
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function readHistory() {
+            try {
+                return JSON.parse(localStorage.getItem('wa_history') || '[]');
+            } catch {
+                return [];
+            }
+        }
+
+        function writeHistory(nextHistory) {
+            try {
+                localStorage.setItem('wa_history', JSON.stringify(nextHistory));
+            } catch {
+                // Ignore storage write failures in restricted environments.
+            }
+        }
+
+        function clearHistoryStorage() {
+            try {
+                localStorage.removeItem('wa_history');
+            } catch {
+                // Ignore storage clear failures in restricted environments.
+            }
+        }
+
         // Populate countries
+        const defaultCountryCode = detectDefaultCountryCode();
         countries.forEach(country => {
             const option = document.createElement('option');
             option.value = country.code;
             option.textContent = `${country.name} (+${country.code})`;
-            if (country.code === "91") option.selected = true;
+            if (country.code === defaultCountryCode) option.selected = true;
             countrySelect.appendChild(option);
         });
 
         // Initialize history
-        let history = JSON.parse(localStorage.getItem('wa_history') || '[]');
+        let history = readHistory();
         renderHistory();
 
         // Country code selection
@@ -545,16 +1518,6 @@
             }
         }
 
-        function getUrl() {
-            const num = phoneInput.value;
-            const msg = messageInput.value.trim();
-            let url = `https://wa.me/${num}`;
-            if (msg) {
-                url += `?text=${encodeURIComponent(msg)}`;
-            }
-            return url;
-        }
-
         function handleOpen() {
             const val = phoneInput.value;
             if (val.length === 0) {
@@ -564,8 +1527,19 @@
             }
 
             if (val.length >= 7 && val.length <= 15) {
-                window.open(getUrl(), '_blank');
                 addToHistory(val);
+                if (mobileFallbackTimer) {
+                    clearTimeout(mobileFallbackTimer);
+                }
+
+                if (isMobile()) {
+                    window.location.href = getDeepLinkUrl();
+                    mobileFallbackTimer = setTimeout(() => {
+                        window.open(getWebUrl(), '_blank');
+                    }, 2000);
+                } else {
+                    window.open(getWebUrl(), '_blank');
+                }
             } else {
                 phoneInput.classList.add('shake');
                 setTimeout(() => phoneInput.classList.remove('shake'), 400);
@@ -580,10 +1554,19 @@
                 return;
             }
 
-            navigator.clipboard.writeText(getUrl()).then(() => {
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2000);
-            });
+            const textToCopy = getWebUrl();
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(showCopyToast).catch(() => {
+                    if (copyTextFallback(textToCopy)) {
+                        showCopyToast();
+                    }
+                });
+                return;
+            }
+
+            if (copyTextFallback(textToCopy)) {
+                showCopyToast();
+            }
         }
 
         function addToHistory(num) {
@@ -593,7 +1576,7 @@
             history.unshift({ number: num, timestamp: Date.now() });
             // Keep last 10
             history = history.slice(0, 10);
-            localStorage.setItem('wa_history', JSON.stringify(history));
+            writeHistory(history);
             renderHistory();
         }
 
@@ -619,22 +1602,85 @@
                     <span class="number">+${item.number}</span>
                     <span class="time">${timeAgo(item.timestamp)}</span>
                 `;
-                li.onclick = () => {
+                const fillHistoryItem = () => {
                     phoneInput.value = item.number;
                     validate();
                     phoneInput.focus();
                 };
+                li.onclick = fillHistoryItem;
+                li.addEventListener('touchstart', fillHistoryItem, { passive: true });
                 historyList.appendChild(li);
             });
         }
 
         openBtn.addEventListener('click', handleOpen);
         copyBtn.addEventListener('click', handleCopy);
+        installBtn.addEventListener('click', promptInstall);
+        headerInstallLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            promptInstall();
+        });
+        mobileBannerAction.addEventListener('click', () => {
+            if (isIOS()) {
+                markMobileBannerSeen();
+                hideMobileBanner();
+                return;
+            }
+
+            promptInstall();
+        });
+        mobileBannerDismiss.addEventListener('click', () => {
+            markMobileBannerSeen();
+            hideMobileBanner();
+        });
+        privacyLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLegalModal(
+                'Privacy Policy',
+                'Last updated: May 2025',
+                `<p>WA Direct is a fully client-side application.</p>
+                <ul>
+                    <li>We do not collect any personal data.</li>
+                    <li>We do not use cookies or tracking scripts.</li>
+                    <li>Phone numbers you enter are never sent to any server.</li>
+                    <li>Call history is stored only in your browser's localStorage and never leaves your device.</li>
+                    <li>We have no user accounts, no sign-ups, no analytics.</li>
+                    <li>We are not affiliated with WhatsApp or Meta in any way.</li>
+                </ul>
+                <p>If you clear your browser data, all history is permanently deleted.
+                This policy may be updated without notice.</p>`
+            );
+        });
+        termsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLegalModal(
+                'Terms of Use',
+                'Last updated: May 2025',
+                `<p>By using WA Direct, you agree to the following:</p>
+                <ul>
+                    <li>WA Direct is provided free of charge, as-is, with no warranties.</li>
+                    <li>This tool simply constructs a wa.me URL and opens it. We do not control WhatsApp or guarantee its availability.</li>
+                    <li>You are responsible for ensuring you have permission to contact the numbers you use.</li>
+                    <li>Do not use this tool for spam, harassment, or unsolicited messaging.</li>
+                    <li>WA Direct is not affiliated with, endorsed by, or connected to WhatsApp LLC or Meta Platforms, Inc.</li>
+                    <li>WhatsApp™ is a registered trademark of Meta Platforms, Inc.</li>
+                    <li>Use of this tool is at your own risk.</li>
+                </ul>`
+            );
+        });
+        legalModalClose.addEventListener('click', hideLegalModal);
+        legalModal.addEventListener('click', (e) => {
+            if (e.target === legalModal) {
+                hideLegalModal();
+            }
+        });
         clearHistoryBtn.addEventListener('click', () => {
             history = [];
-            localStorage.removeItem('wa_history');
+            clearHistoryStorage();
             renderHistory();
         });
+
+        [openBtn, copyBtn, clearHistoryBtn, installBtn, mobileBannerAction, mobileBannerDismiss].forEach(addTouchFeedback);
 
         // Keyboard Shortcuts
         window.addEventListener('keydown', (e) => {
@@ -655,6 +1701,10 @@
             }
             // Escape (Clear)
             if (e.key === 'Escape') {
+                if (legalModal.classList.contains('show')) {
+                    hideLegalModal();
+                    return;
+                }
                 phoneInput.value = '';
                 messageInput.value = '';
                 validate();
@@ -676,27 +1726,30 @@
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredInstallPrompt = e;
-            installBtn.style.display = 'inline-flex';
-        });
-
-        installBtn.addEventListener('click', async () => {
-            if (!deferredInstallPrompt) return;
-
-            deferredInstallPrompt.prompt();
-            const { outcome } = await deferredInstallPrompt.userChoice;
-            if (outcome === 'accepted') {
-                installBtn.style.display = 'none';
+            if (!isMobile()) {
+                installBtn.style.display = 'inline-flex';
+            } else {
+                mobileBannerCopy.textContent = 'Add to Home Screen for app experience';
+                mobileBannerAction.textContent = 'Install';
+                showMobileBanner();
             }
-            deferredInstallPrompt = null;
         });
 
         window.addEventListener('appinstalled', () => {
             deferredInstallPrompt = null;
             installBtn.style.display = 'none';
+            markMobileBannerSeen();
+            hideMobileBanner();
         });
 
+        if (isIOS()) {
+            mobileBannerCopy.textContent = 'Tap Share \u2192 Add to Home Screen';
+            mobileBannerAction.textContent = 'Got it';
+            showMobileBanner();
+        }
+
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js');
+            navigator.serviceWorker.register('/sw.js');
         }
 
     </script>

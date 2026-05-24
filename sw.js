@@ -1,5 +1,5 @@
-const CACHE_NAME = 'wa-direct-v1';
-const ASSETS = ['./index.html', './manifest.json', './sw.js'];
+const CACHE_NAME = 'wa-direct-v2';
+const ASSETS = ['/', '/index.html', '/manifest.json', '/sw.js'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
