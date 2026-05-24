@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WA Direct - WhatsApp Number Redirect</title>
+    <!-- Favicon: Green circle with white 'W' -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%2325D366'/><text x='50' y='65' font-family='Arial' font-weight='bold' font-size='50' text-anchor='middle' fill='white'>W</text></svg>">
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --container-bg: #ffffff;
+            --text-color: #111b21;
+            --secondary-text: #667781;
+            --accent-color: #25d366;
+            --accent-hover: #1da851;
+            --error-color: #ea0038;
+            --warning-color: #ffbc00;
+            --border-color: #e9edef;
+            --input-focus: #25d366;
+            --history-bg: #f8f9fa;
+            --shadow: 0 2px 5px rgba(11, 20, 26, 0.08);
+            --transition: all 0.2s ease-in-out;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0b141a;
+                --container-bg: #111b21;
+                --text-color: #e9edef;
+                --secondary-text: #8696a0;
+                --accent-color: #00a884;
+                --accent-hover: #06cf9c;
+                --error-color: #f15c6d;
+                --warning-color: #ffd279;
+                --border-color: #222d34;
+                --input-focus: #00a884;
+                --history-bg: #202c33;
+                --shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+        }
+
+        p.subtitle {
+            color: var(--secondary-text);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--secondary-text);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        select {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            font-size: 18px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.2);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            font-size: 16px;
+            resize: vertical;
+            min-height: 80px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 13px;
+            margin-top: 5px;
+            height: 18px;
+        }
+
+        .warning-message {
+            color: var(--warning-color);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.8;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .history-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .history-header h2 {
+            font-size: 16px;
+            color: var(--secondary-text);
+        }
+
+        .btn-clear {
+            background: transparent;
+            color: var(--secondary-text);
+            font-size: 12px;
+            padding: 4px 8px;
+            width: auto;
+            flex: none;
+        }
+
+        .history-list {
+            list-style: none;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: var(--history-bg);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .history-item:hover {
+            transform: translateX(4px);
+            background-color: var(--border-color);
+        }
+
+        .history-item .number {
+            font-weight: 600;
+        }
+
+        .history-item .time {
+            font-size: 12px;
+            color: var(--secondary-text);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text-color);
+            color: var(--container-bg);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.2s ease-in-out 0s 2;
+            border-color: var(--error-color) !important;
+        }
+
+        .shortcuts-hint {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--secondary-text);
+            opacity: 0.7;
+        }
+
+        kbd {
+            background: var(--border-color);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WA Direct</h1>
+            <p class="subtitle">Quickly chat on WhatsApp without saving contacts</p>
+        </header>
+
+        <div class="form-group">
+            <label for="phone-input">Phone Number</label>
+            <div class="input-wrapper">
+                <select id="country-code" title="Select Country Code">
+                    <!-- Loaded via JS -->
+                </select>
+                <input type="text" id="phone-input" placeholder="Enter number with country code" autocomplete="off" autofocus>
+            </div>
+            <div id="validation-msg" class="error-message"></div>
+            <div id="warning-msg" class="warning-message"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="message-input">Optional Message</label>
+            <textarea id="message-input" placeholder="Pre-fill a message (optional)"></textarea>
+        </div>
+
+        <div class="button-group">
+            <button id="open-btn" class="btn-primary" disabled>
+                Open WhatsApp
+            </button>
+            <button id="copy-btn" class="btn-secondary">
+                Copy Link
+            </button>
+        </div>
+
+        <div id="history-container" class="history-section" style="display: none;">
+            <div class="history-header">
+                <h2>Recent Numbers</h2>
+                <button id="clear-history" class="btn-clear">Clear history</button>
+            </div>
+            <ul id="history-list" class="history-list"></ul>
+        </div>
+
+        <div class="shortcuts-hint">
+            <kbd>Enter</kbd> Open &nbsp; <kbd>Ctrl+L</kbd> Focus &nbsp; <kbd>Esc</kbd> Clear
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Copied!</div>
+
+    <script>
+        const countries = [
+            { name: "India", code: "91" },
+            { name: "USA", code: "1" },
+            { name: "UK", code: "44" },
+            { name: "UAE", code: "971" },
+            { name: "Saudi Arabia", code: "966" },
+            { name: "Pakistan", code: "92" },
+            { name: "Bangladesh", code: "880" },
+            { name: "Nepal", code: "977" },
+            { name: "Canada", code: "1" },
+            { name: "Australia", code: "61" },
+            { name: "Germany", code: "49" },
+            { name: "France", code: "33" },
+            { name: "Singapore", code: "65" },
+            { name: "Malaysia", code: "60" },
+            { name: "Indonesia", code: "62" },
+            { name: "Nigeria", code: "234" },
+            { name: "Kenya", code: "254" },
+            { name: "Brazil", code: "55" },
+            { name: "South Africa", code: "27" },
+            { name: "Qatar", code: "974" }
+        ];
+
+        const phoneInput = document.getElementById('phone-input');
+        const countrySelect = document.getElementById('country-code');
+        const messageInput = document.getElementById('message-input');
+        const openBtn = document.getElementById('open-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const validationMsg = document.getElementById('validation-msg');
+        const warningMsg = document.getElementById('warning-msg');
+        const historyContainer = document.getElementById('history-container');
+        const historyList = document.getElementById('history-list');
+        const clearHistoryBtn = document.getElementById('clear-history');
+        const toast = document.getElementById('toast');
+
+        // Populate countries
+        countries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.code;
+            option.textContent = `${country.name} (+${country.code})`;
+            if (country.code === "91") option.selected = true;
+            countrySelect.appendChild(option);
+        });
+
+        // Initialize history
+        let history = JSON.parse(localStorage.getItem('wa_history') || '[]');
+        renderHistory();
+
+        // Country code selection
+        countrySelect.addEventListener('change', () => {
+            const code = countrySelect.value;
+            // Prepend if input doesn't already start with a likely code
+            // For simplicity, just set the value if empty, or replace start if it looks like a code
+            if (phoneInput.value.length < 5) {
+                phoneInput.value = code + phoneInput.value.replace(/^\d{1,4}/, '');
+            } else if (!phoneInput.value.startsWith(code)) {
+                phoneInput.value = code + phoneInput.value;
+            }
+            validate();
+            phoneInput.focus();
+        });
+
+        // Input cleaning and validation
+        phoneInput.addEventListener('input', () => {
+            // Auto-strip non-digits
+            phoneInput.value = phoneInput.value.replace(/[^\d]/g, '');
+            validate();
+        });
+
+        function validate() {
+            const val = phoneInput.value;
+            openBtn.disabled = val.length === 0;
+            
+            validationMsg.textContent = "";
+            warningMsg.textContent = "";
+            phoneInput.classList.remove('shake');
+
+            if (val.length > 0) {
+                if (val.startsWith('0')) {
+                    warningMsg.textContent = "Remove leading 0. Use country code instead.";
+                }
+                if (val.length < 7 || val.length > 15) {
+                    validationMsg.textContent = "Enter a valid number (7–15 digits)";
+                }
+            }
+        }
+
+        function getUrl() {
+            const num = phoneInput.value;
+            const msg = messageInput.value.trim();
+            let url = `https://wa.me/${num}`;
+            if (msg) {
+                url += `?text=${encodeURIComponent(msg)}`;
+            }
+            return url;
+        }
+
+        function handleOpen() {
+            const val = phoneInput.value;
+            if (val.length === 0) {
+                phoneInput.classList.add('shake');
+                setTimeout(() => phoneInput.classList.remove('shake'), 400);
+                return;
+            }
+
+            if (val.length >= 7 && val.length <= 15) {
+                window.open(getUrl(), '_blank');
+                addToHistory(val);
+            } else {
+                phoneInput.classList.add('shake');
+                setTimeout(() => phoneInput.classList.remove('shake'), 400);
+            }
+        }
+
+        function handleCopy() {
+            const val = phoneInput.value;
+            if (val.length < 7 || val.length > 15) {
+                phoneInput.classList.add('shake');
+                setTimeout(() => phoneInput.classList.remove('shake'), 400);
+                return;
+            }
+
+            navigator.clipboard.writeText(getUrl()).then(() => {
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+        }
+
+        function addToHistory(num) {
+            // Remove if already exists
+            history = history.filter(item => item.number !== num);
+            // Add to front
+            history.unshift({ number: num, timestamp: Date.now() });
+            // Keep last 10
+            history = history.slice(0, 10);
+            localStorage.setItem('wa_history', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function timeAgo(prevTime) {
+            const diff = Math.floor((Date.now() - prevTime) / 1000);
+            if (diff < 60) return "Just now";
+            if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+            return `${Math.floor(diff / 86400)}d ago`;
+        }
+
+        function renderHistory() {
+            if (history.length === 0) {
+                historyContainer.style.display = 'none';
+                return;
+            }
+            historyContainer.style.display = 'block';
+            historyList.innerHTML = '';
+            history.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'history-item';
+                li.innerHTML = `
+                    <span class="number">+${item.number}</span>
+                    <span class="time">${timeAgo(item.timestamp)}</span>
+                `;
+                li.onclick = () => {
+                    phoneInput.value = item.number;
+                    validate();
+                    phoneInput.focus();
+                };
+                historyList.appendChild(li);
+            });
+        }
+
+        openBtn.addEventListener('click', handleOpen);
+        copyBtn.addEventListener('click', handleCopy);
+        clearHistoryBtn.addEventListener('click', () => {
+            history = [];
+            localStorage.removeItem('wa_history');
+            renderHistory();
+        });
+
+        // Keyboard Shortcuts
+        window.addEventListener('keydown', (e) => {
+            // Enter
+            if (e.key === 'Enter') {
+                // If in textarea, standard Enter works. If not, trigger open.
+                if (document.activeElement !== messageInput) {
+                    handleOpen();
+                }
+            }
+            // Ctrl+L (Clear and focus)
+            if (e.ctrlKey && e.key.toLowerCase() === 'l') {
+                e.preventDefault();
+                phoneInput.value = '';
+                messageInput.value = '';
+                validate();
+                phoneInput.focus();
+            }
+            // Escape (Clear)
+            if (e.key === 'Escape') {
+                phoneInput.value = '';
+                messageInput.value = '';
+                validate();
+                phoneInput.blur();
+            }
+        });
+
+        // Support Enter in textarea as well if we want it to trigger, but usually textarea Enter is for new lines.
+        // User said: "Enter key works from both input and textarea"
+        // Let's refine the textarea behavior: Shift+Enter for new line, Enter for submit?
+        // Or just Enter for submit if text is short? The prompt says "Enter key triggers the action".
+        messageInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleOpen();
+            }
+        });
+
+    </script>
+</body>
+</html>
